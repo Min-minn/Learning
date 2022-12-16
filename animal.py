@@ -10,13 +10,10 @@ def dog():
     print('Woof!')
 
 def main():
-<<<<<<< HEAD
     if sys.argv[1] == 'cat':
         cat()
-=======
-    if sys.argv[1] == 'dog':
+    elif sys.argv[1] == 'dog':
         dog()
->>>>>>> dog
     else:
         default()
 
