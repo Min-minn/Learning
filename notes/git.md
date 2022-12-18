@@ -55,21 +55,29 @@ $ git remote -v
 Adding Remote Repositories
 $ git remote add name https://
 $ git fetch <remote>
+$ git fetch <local> <remote>
+$ git fetch <local> <remote>:<newname>
+$ git fetch <local> :<newname>  create new localbranch
 $ git pull fetch&merge
 $ git checkout -b <local> origin/<remote>
 $ git checkout --track origin/<remote>
 $ git push <remote> <branch>
 $ git push <remote> <branch>:awesomebranch
+$ git push <remote> :<newname>  delete remotebranch
 $ git remote show <remote>
 $ git remote rename <oldname> <newname>
 $ git remote remove <name>
-$ git tag -l
+$ git fakeTeamwork  Create remote commit
+$ git fakeTeamwork branch 3
+$ git pull --rebase
 ```
 ## Git Branches
 ```
 $ git branch newbranch
 $ git checkout newbranch  Switching Branches
 $ git checkout -b <newbranchname>  Create and switching branch
+$ git checkout -b <newbranchname> <origin/master>  switch new master
+$ git branch -u <origin/main> <newmaster>  switch new master
 $ git log --oneline --decorate --graph --all
 $ git merge newbranch  **after switching back to master**
 $ git branch -d newbranch
@@ -89,6 +97,7 @@ $ git rebase main branch
 $ git cherry-pick c0 c2  copy c1 c2 to master
 $ git reset HEAD~1  local
 $ git revert HEAD  remote
+$ git tag -l
 ```
 
 
