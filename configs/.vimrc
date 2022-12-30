@@ -1,4 +1,4 @@
-:echo ">^.^<"
+:echo "<=^.^=>"
 " Comments in Vimscript start with a `"`.
 
 " If you open this file in Vim, it'll be syntax highlighted for you.
@@ -6,30 +6,41 @@
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" enable filetype plugins
-filetype plugin on
+set nocompatible
+
+" UI Config
+" """""""""""""""""""""""""""""""""
+set number              " show line numbers
+set relativenumber      " show relative numbering
+set showcmd             " show command in bottom bar
+set cursorline          " highlight current line
+filetype indent on      " load filetype-specific indent files
+filetype plugin on      " load filetype specific plugin files
+set wildmenu            " visual autocomplete for command menu
+set showmatch           " highlight matching [{()}]
+set laststatus=2        " Show the status line at the bottom
+set mouse+=a            " A necessary evil, mouse support
+set selection=exclusive
+set selectmode=mouse,key
+set noerrorbells visualbell t_vb=    "Disable annoying error noises
+set splitbelow          " Open new vertical split bottom
+set splitright          " Open new horizontal splits right
+set linebreak           " Have lines wrap instead of continue off-screen
+set scrolloff=12        " Keep cursor in approximately the middle of the screen
+
+
 set clipboard+=unnamed
 
 " set auto read when a file is changed from outside
 set autoread
 
 
-" Set regular expression engine automatically
-set regexpengine=0
+set regexpengine=0 " Set regular expression engine automatically
 
 """""Encoding"""""""
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
 
-"""""Interface"""""""""
-" Vim is based on Vi. Setting `nocompatible` switches from the default
-" Vi-compatibility mode and enables useful Vim functionality. This
-" configuration option turns out not to be necessary for the file named
-" '~/.vimrc', because Vim automatically enters nocompatible mode if that file
-" is present. But we're including it here just in case this config file is
-" loaded some other way (e.g. saved as `foo`, and then Vim started with
-" `vim -u foo`).
-set nocompatible
 
 " Turn on syntax highlighting.
 syntax on
@@ -39,41 +50,31 @@ colorscheme desert
 " Disable the default Vim startup message.
 set shortmess+=I
 
-" 3lines of distance
-set scrolloff=3
 
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-" Show line numbers.
-set number
-" empashsis certain line
-set cursorline
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
 
 " right condition
 set ruler
 " condition
 set showmode
-" Always show the status line at the bottom, even if you only have one window open.
-set laststatus=2
 
-"""""Edit""""""
-" autoindent
-set autoindent
+"Edit
+"""""""
+" Spaces & Tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " Insert 4 spaces on a tab
+set expandtab       " tabs are spaces, mainly because of python
+set autoindent		" Auto indent
 set smartindent
-" tab lenth
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set smarttab
-" set tab to space
-set noexpandtab
-" break line automatically
-set wrap
+set noexpandtab		" set tab to space
+set wrap " break line automatically
+
 set iskeyword+=_,$,@,%,#,-
-" The backspace key has slightly unintuitive behavior by default. For example,
+" The backspace key has slightlunintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
 " This configuration makes backspace behave more reasonably, in that you can
 " backspace over anything.
@@ -96,13 +97,6 @@ set noswapfile
 " to see if the Esc is the start of an escape sequence.  I
 set ttimeout
 
-" This enables relative line numbering mode. With both number and
-" relativenumber enabled, the current line shows the true line number, while
-" all other lines (above and below) are numbered relative to the current line.
-" This is useful because you can tell, at a glance, what count is needed to
-" jump up or down to a particular line, by {count}k to go up or {count}j to go
-" down.
-set relativenumber
 
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
@@ -111,32 +105,18 @@ set relativenumber
 " for more information on this.
 set hidden
 
-"""""Search"""""""
-" This setting makes search case-insensitive when all characters in the string
-" being searched are lowercase. However, the search becomes case-sensitive if
-" it contains any capital letters. This makes searching more convenient.
-set ignorecase
-set smartcase
-" Enable searching as you type, rather than waiting till you press enter.
-set incsearch
-" This switches on the 'hlsearch' option, telling Vim to highlight matches with
-" the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  set hlsearch
-endif
-" match brakets
-set showmatch
-set matchtime=2
+"Search
+"""""""""""""""""""""""
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+set ignorecase          " Ignore case in searches by default
+set smartcase           " But make it case sensitive if an uppercase is entered
+" turn off search highlight
+vnoremap <C-h> :nohlsearch<cr>
+nnoremap <C-h> :nohlsearch<cr>
 
 " For regular expressions turn magic on
 set magic
-
-" Display completion matches in a status line.  That is when you type <Tab> and
-" there is more than one match.  See 'wildmenu'.
-set wildmenu
-" Display an incomplete command in the lower right corner of the Vim window,
-" left of the ruler
-set showcmd
 
 " Keep 200 commands and 200 search patterns in the history.  Use another number
 " if you want to remember fewer or more lines.  See 'history'.
@@ -150,29 +130,13 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-" Enable mouse support. You should avoid relying on this too much, but it can
-" sometimes be convenient.
-set mouse+=a
-set selection=exclusive
-set selectmode=mouse,key
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
 let maplocalleader = "-"
 
-" Try to prevent bad habits like using the arrow keys for movement. This is
-" not the only possible bad habit. For example, holding down the h/j/k/l keys
-" for movement, rather than using more efficient movement commands, is also a
-" bad habit. The former is enforceable through a .vimrc, while we don't know
-" how to prevent the latter.
-" Do this in normal mode...
+" Try to prevent bad habits like using the arrow keys for movement
 nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
@@ -186,46 +150,11 @@ vnoremap <Down>  <ESC>:echoe "Use j"<CR>
 " Fast saving and fast quiting
 nnoremap <leader>w :w!<cr>
 
-" Smart way to move between iwindows (<ctrl>j etc.):
-noremap \j <C-W>j
-noremap \k <C-W>k
-noremap \h <C-W>h
-noremap \l <C-W>l
-noremap \s <C-W>s
-noremap \v <C-W>v
-noremap \n <C-W>n
-" easily window acttion
-noremap \= <C-W>=
-noremap \+ <C-W>+
-noremap \- <C-W>-
-noremap \_ <C-W>_
-noremap \< <C-W><
-noremap \> <C-W>>
-noremap \H <C-W>H
-noremap \J <C-W>J
-noremap \K <C-W>K
-noremap \L <C-W>L
-noremap \P <C-W>P
-noremap \T <C-W>T
-noremap \W <C-W>W
-noremap \w <C-W>w
+"  ;  --   FZF
+nmap <Leader>; :Buffers<CR>
 
-" surround the visual selection in parenthesis/brackets/etc.:
-" vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-" vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-" vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-" vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-" vnoremap $q <esc>`>a'<esc>`<i'<esc>
-" vnoremap $e <esc>`>a`<esc>`<i`<esc>
-
-" Quickly insert parenthesis/brackets/etc.:
-" inoremap $1 ()<esc>i
-" inoremap $2 []<esc>i
-" inoremap $3 {}<esc>i
-" inoremap $4 {<esc>o}<esc>O
-" inoremap $q ''<esc>i
-" inoremap $e ""<esc>i
-" inoremap $t <><esc>i
+"  <Space>  --  <leader><leader> toggles between buffers
+nnoremap <Leader><Leader> <c-^>
 
 " Disable highlight when <leader><cr> is pressed
 noremap <silent> <leader><cr> :noh<cr>
@@ -256,6 +185,11 @@ noremap <leader>ss :setlocal spell!<cr>
 """map
 nnoremap <Space> o<esc>
 nnoremap <BS> 0k
-nnoremap -- $
+nnoremap H ^
+nnoremap L $
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+" Something do with $MYVIMRC
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
