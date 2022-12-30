@@ -10,12 +10,11 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""
 call plug#begin()
 Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
-
 " UI Config
-" """""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""
 syntax on " Turn on syntax highlighting.
 set number              " show line numbers
 set relativenumber      " show relative numbering
@@ -26,6 +25,7 @@ filetype plugin on      " load filetype specific plugin files
 set wildmenu            " visual autocomplete for command menu
 set showmatch           " highlight matching [{()}]
 set laststatus=2        " Show the status line at the bottom
+set t_Co=256      "color
 set mouse+=a            " A necessary evil, mouse support
 set selection=exclusive
 set selectmode=mouse,key
@@ -43,6 +43,8 @@ set regexpengine=0 " Set regular expression engine automatically
 
 set shortmess+=I " Disable the default Vim startup message.
 set foldcolumn=1 " Add a bit extra margin to the left
+set ruler " right condition
+set showmode " condition
 
 
 """""Encoding"""""""
@@ -55,10 +57,18 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 """""""""""""""""""""""""""""""
 " colorscheme desert
 colorscheme gruvbox
-let g:airline_theme="molokai"
+" colorscheme molokai
+" Airline
+"""""""""""""""""""""""""""""""
+" let g:airline_theme="molokai"
+" open tabline, check and change Buffer
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
-set ruler " right condition
-set showmode " condition
+" Change Between Buffer
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-s-tab> :bp<CR>
+
 
 "Edit
 """""""
