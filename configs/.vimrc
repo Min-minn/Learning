@@ -1,6 +1,4 @@
 :echo "<=^.^=>"
-" Comments in Vimscript start with a `"`.
-
 " If you open this file in Vim, it'll be syntax highlighted for you.
 
 " Return to last edit position when opening files (You want this!)
@@ -8,8 +6,17 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 set nocompatible
 
+" Plugins
+""""""""""""""""""""""""""""""""""""
+call plug#begin()
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()
+
+
 " UI Config
 " """""""""""""""""""""""""""""""""
+syntax on " Turn on syntax highlighting.
 set number              " show line numbers
 set relativenumber      " show relative numbering
 set showcmd             " show command in bottom bar
@@ -27,38 +34,31 @@ set splitbelow          " Open new vertical split bottom
 set splitright          " Open new horizontal splits right
 set linebreak           " Have lines wrap instead of continue off-screen
 set scrolloff=12        " Keep cursor in approximately the middle of the screen
-
+set background=dark    " Setting dark mode
+" set background=light   " Setting light mode
 
 set clipboard+=unnamed
-
-" set auto read when a file is changed from outside
-set autoread
-
-
+set autoread " set auto read when a file is changed from outside
 set regexpengine=0 " Set regular expression engine automatically
+
+set shortmess+=I " Disable the default Vim startup message.
+set foldcolumn=1 " Add a bit extra margin to the left
+
 
 """""Encoding"""""""
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
 
 
-" Turn on syntax highlighting.
-syntax on
-" Tell Vim to always use your color scheme.
-colorscheme desert
 
-" Disable the default Vim startup message.
-set shortmess+=I
+" Colorscheme
+"""""""""""""""""""""""""""""""
+" colorscheme desert
+colorscheme gruvbox
+let g:airline_theme="molokai"
 
-
-" Add a bit extra margin to the left
-set foldcolumn=1
-
-
-" right condition
-set ruler
-" condition
-set showmode
+set ruler " right condition
+set showmode " condition
 
 "Edit
 """""""
