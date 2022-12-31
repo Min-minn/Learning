@@ -57,10 +57,11 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 """""""""""""""""""""""""""""""
 " colorscheme desert
 colorscheme gruvbox
-" colorscheme molokai
+
+
 " Airline
 """""""""""""""""""""""""""""""
-" let g:airline_theme="molokai"
+" let g:airline_theme=
 " open tabline, check and change Buffer
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
